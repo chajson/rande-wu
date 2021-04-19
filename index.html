@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="pl">
 
 <head>
   <meta charset="utf-8">
@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="css/main.css">
 
   <meta name="theme-color" content="#fafafa">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
 </head>
 
 <body>
@@ -23,7 +28,66 @@
   <![endif]-->
 
   <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+<div id="firebaseui-auth-container">
+    <input type="email" id="email" name="fname" value="Email"><br>
+    <input type="password" id="password" name="lname" value="Password"><br><br>
+    <button onclick="signUp()" id="signUp">Zarejestruj</button>
+    <button onclick="signIn()" id="signIn">Zaloguj</button>
+    <button onclick="signOut()" id="signOut">Wyloguj</button>
+</div>
+  <div id="loader">Loading..</div>
+
+  <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+          apiKey: "AIzaSyA5D5N_9YWAIKXq26nvRhC3jtdG3zCYSMc",
+          authDomain: "randewu-d91d7.firebaseapp.com",
+          projectId: "randewu-d91d7",
+          storageBucket: "randewu-d91d7.appspot.com",
+          messagingSenderId: "950118542915",
+          appId: "1:950118542915:web:bc4149f36d3ad06b8eaef6"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const signUp = () => {
+          const email = document.getElementById("email");
+          const password = document.getElementById("password");
+          const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+          promise.catch(e => alert(e.message));
+          alert("Signed Up");
+      };
+
+      const signIn = () => {
+          const email = document.getElementById("email");
+          const password = document.getElementById("password");
+
+          try {
+              auth.signInWithEmailAndPassword(email.value, password.value);
+          } catch (e) {
+              throw e;
+          }
+      };
+
+
+      const signOut = () => {
+          auth.signOut();
+          alert("Signed Out");
+      };
+
+
+
+      auth.onAuthStateChanged((user) => {
+          if(user){
+              const email = user.email;
+              alert("Active User " + email);
+          }else{
+              alert("No Active User");
+          }
+      });
+
+
+  </script>
   <script src="js/vendor/modernizr-3.8.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
