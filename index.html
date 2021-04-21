@@ -20,22 +20,27 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-  <!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
 
-  <!-- Add your site or application content here -->
-<div id="firebaseui-auth-container">
-    <input type="email" id="email" name="fname" value="Email"><br>
-    <input type="password" id="password" name="lname" value="Password"><br><br>
-    <button onclick="signUp()" id="signUp">Zarejestruj</button>
-    <button onclick="signIn()" id="signIn">Zaloguj</button>
-    <button onclick="signOut()" id="signOut">Wyloguj</button>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form>
+        <input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
+        <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+        <button onclick="signIn()" class="fadeIn fourth" id="signIn">Zaloguj</button>
+        <!-- <button onclick="signUp()" class="fadeIn fourth" id="signUp">Zarejestruj</button>
+        <button onclick="signOut()" class="fadeIn fourth" id="signOut">Wyloguj</button> -->
+        </form>
+        <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>    
+    </div>
 </div>
-  <div id="loader">Loading..</div>
+
 
   <script>
       // Your web app's Firebase configuration
