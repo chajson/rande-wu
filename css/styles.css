@@ -314,3 +314,10 @@ input[type=password] {
       margin: 5px 0 !important;
     }
   }
+
+
+/* NAV STYLES */
+
+nav {
+  padding:30px;
+}
