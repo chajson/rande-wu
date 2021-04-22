@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="pl">
+<html lang="pl">
 
 <head>
   <meta charset="utf-8">
@@ -18,6 +18,7 @@
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
   <link rel="stylesheet" href="css/styles.css">
@@ -28,15 +29,15 @@
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <form>
+    <form action="main.html">
       <input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
       <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-      <button onclick="signUp()" class="fadeIn fourth" id="signIn">Zaloguj</button>
+      <button onclick="signIn()" class="fadeIn fourth" id="signIn">Zaloguj</button>
       <!-- <button onclick="signUp()" class="fadeIn fourth" id="signUp">Zarejestruj</button>
       <button onclick="signOut()" class="fadeIn fourth" id="signOut">Wyloguj</button> -->
     </form>
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href='./register.html'>Założ konto</a>
     </div>
   </div>
 </div>
@@ -47,6 +48,7 @@
     const firebaseConfig = {
         apiKey: "AIzaSyA5D5N_9YWAIKXq26nvRhC3jtdG3zCYSMc",
         authDomain: "randewu-d91d7.firebaseapp.com",
+        databaseURL: "https://randewu-d91d7.firebaseio.com",
         projectId: "randewu-d91d7",
         storageBucket: "randewu-d91d7.appspot.com",
         messagingSenderId: "950118542915",
@@ -55,11 +57,19 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    firebase.firestore.setLogLevel("debug");    // "debug" | "error" | "silent"
+    const db = firebase.firestore();
+
     const signUp = () => {
-        const email = document.getElementById("email");
-        const password = document.getElementById("password");
-        const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-        promise.catch(e => alert(e.message));
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+            db.collection("users").add({email, password}).then((res) => console.log(res)).then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+            auth.createUserWithEmailAndPassword(email, password).then((res) => console.log(res));
         alert("Signed Up");
     };
 
