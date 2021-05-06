@@ -1,12 +1,23 @@
 {
-  "short_name": "",
-  "name": "",
-  "icons": [{
-    "src": "icon.png",
-    "type": "image/png",
-    "sizes": "192x192"
-  }],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#fafafa",
-  "theme_color": "#fafafa"
-}
+    "short_name": "RW",
+    "name": "RandeWu",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFF",
+  "description": "Aplikacja społecznościowa",
+  "lang": "pl-PL",
+  "theme_color": "#FFF",
+  "icons": [
+      {
+        "src":   "./img/pobrane.jpg",
+        "type":  "image/jpg",
+        "sizes": "192x192"
+      }
+    ],
+    "start_url": ".",
+    "background_color": "white",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "white"
+  }
+

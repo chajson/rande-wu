@@ -15,11 +15,6 @@
   <link rel="stylesheet" href="css/main.css">
 
   <meta name="theme-color" content="#fafafa">
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
@@ -29,71 +24,29 @@
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <form action="main.html">
-      <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email" required>
+    <form id="signup-form">
+      <input type="text" id="singup-email" class="fadeIn second" name="email" placeholder="Email" required>
       <input type="text" id="nick" class="fadeIn second" name="email" placeholder="Nick" required>
-      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Hasło" required>
+      <input type="password" id="signup-password" class="fadeIn third" name="password" placeholder="Hasło" required>
       <input type="password" id="repeatPassword" class="fadeIn third" name="password" placeholder="Powtórz hasło " required>
-      <button onclick="signUp()" class="fadeIn fourth" id="singUp">Zarejestruj</button>
-      <!-- <button onclick="signUp()" class="fadeIn fourth" id="signUp">Zarejestruj</button>
-      <button onclick="signOut()" class="fadeIn fourth" id="signOut">Wyloguj</button> -->
+      <button class="fadeIn fourth" id="singUp">Zarejestruj</button>
     </form>
     <div id="formFooter">
       <a class="underlineHover" href='./login.html'>Zaloguj</a>
     </div>
   </div>
 </div>
-
-
-<script>
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyA5D5N_9YWAIKXq26nvRhC3jtdG3zCYSMc",
-        authDomain: "randewu-d91d7.firebaseapp.com",
-        databaseURL: "https://randewu-d91d7.firebaseio.com",
-        projectId: "randewu-d91d7",
-        storageBucket: "randewu-d91d7.appspot.com",
-        messagingSenderId: "950118542915",
-        appId: "1:950118542915:web:ceddf745acef13538eaef6"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    firebase.firestore.setLogLevel("debug");    // "debug" | "error" | "silent"
-    const db = firebase.firestore();
-
-    const signUp = () => {
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        const repeatPassword = document.getElementById("repeatPassword").value;
-        const nick = document.getElementById("nick").value;
-        if(password !== repeatPassword){
-            alert("Złe hasło");
-            throw("Złe hasło");
-        }
-        db.collection("users").add({email, password, nick}).then((res) => console.log(res)).then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-        })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-            });
-        auth.createUserWithEmailAndPassword(email, password).then((res) => console.log(res));
-    };
-
-
-</script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
+<script src="js/initialize-app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
 <script src="js/vendor/modernizr-3.8.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
-
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-<script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
-</script>
-<script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 
 </html>

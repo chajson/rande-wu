@@ -63,12 +63,15 @@
     const signIn = () => {
         const email = document.getElementById("email");
         const password = document.getElementById("password");
-
-        try {
-            auth.signInWithEmailAndPassword(email.value, password.value);
-        } catch (e) {
-            throw e;
-        }
+        auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    var user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
     };
 
 

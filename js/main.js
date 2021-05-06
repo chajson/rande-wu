@@ -1,6 +1,5 @@
-$(document).ready(function() {
-    $('.btn').click(function() {
-        $('.active').hide();
-        $('.carousel-control-next').click();
-    })
-});
+const createUser = (email, password) => {
+  db.collection("users").add({email, password}).then(() => {
+  })
+    .catch((err) => console.log(err));
+};
