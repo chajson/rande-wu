@@ -5,15 +5,15 @@ signupForm.addEventListener('submit', (e) => {
 
   const email = signupForm['singup-email'].value;
   const password = signupForm['signup-password'].value;
-  createUser(email, password);
+  const name = signupForm['signup-name'].value;
+  const surname = signupForm['signup-surname'].value;
+  createUser(email, password, name ,surname);
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
     const modal = document.getElementById('signupModal');
     window.location.href="./main.html";
     signupForm.reset();
   }).catch((e) => {
     console.log(e)
-    // displayErrors(e, 'error-signup');
-
   });
 });
 
