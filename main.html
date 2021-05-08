@@ -58,11 +58,8 @@
                       <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
                       <div class="media-body mb-3">
                       <h4 class="mt-0 mb-0">${doc.data().name} ${doc.data().surname}</h4>
-                      <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Kraków</p>
                       </div>
                       <div class="media-footer mb-3">
-                      <button type="button" class="btn btn-danger">Odrzuć</button>
-                      <button type="button" class="btn btn-success">Zaakceptuj</button>
                       </div>
                       </div>
                       </div>
@@ -99,7 +96,6 @@
             const data = querySnapshot.docs;
             const doc = data.next();
             Array.prototype.current++;
-            console.log(data.current)
                 carousel.innerHTML =
                     `<div class="carousel-item active">
                         <div class="row py-5 px-4">
@@ -112,11 +108,8 @@
                       <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
                       <div class="media-body mb-3">
                       <h4 class="mt-0 mb-0">${doc.data().name} ${doc.data().surname}</h4>
-                      <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Kraków</p>
                       </div>
                       <div class="media-footer mb-3">
-                      <button type="button" class="btn btn-danger">Odrzuć</button>
-                      <button type="button" class="btn btn-success">Zaakceptuj</button>
                       </div>
                       </div>
                       </div>
@@ -158,11 +151,8 @@
                 <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
                 <div class="media-body mb-3">
                 <h4 class="mt-0 mb-0">${doc.data().name} ${doc.data().surname}</h4>
-                <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Kraków</p>
                 </div>
                 <div class="media-footer mb-3">
-                <button type="button" class="btn btn-danger">Odrzuć</button>
-                <button type="button" class="btn btn-success">Zaakceptuj</button>
                 </div>
                 </div>
                 </div>

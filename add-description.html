@@ -20,10 +20,10 @@
 <body>
 <nav><a href="login.html">Wyloguj</a></nav>
 <nav><a href="main.html">Poznaj nowe osoby</a></nav>
-<div class="form-group">
+<div class="form-group text-center">
   <form id="description-form">
-  <label for="textArea">Example textarea</label>
-  <input type="text" class="form-control" id="textArea" rows="3">
+  <label for="textArea">Napisz coś o sobie</label>
+  <input type="text" class="form-control form-control-lg" id="textArea" rows="3">
   <button class="fadeIn fourth" id="addDescriptionButton">Dodaj Opis</button>
   </form>
 </div>
@@ -45,6 +45,7 @@
           db.collection("users").where("email", "==", currentEmail).get().then((querySnapshot) => {
               querySnapshot.forEach((doc)=> {
                   db.collection("users").doc(doc.id).update({descriptionText}).then(() => {
+                      alert('Dodano opis!')
                   }).catch((err) => console.log(err));
               })
           }).catch((err) => console.log(err));

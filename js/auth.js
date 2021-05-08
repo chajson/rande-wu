@@ -1,37 +1,18 @@
 
-const signupForm = document.getElementById('signup-form');
-signupForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const email = signupForm['singup-email'].value;
-  const password = signupForm['signup-password'].value;
-  const name = signupForm['signup-name'].value;
-  const surname = signupForm['signup-surname'].value;
-  createUser(email, password, name ,surname);
-  auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    const modal = document.getElementById('signupModal');
-    window.location.href="./main.html";
-    signupForm.reset();
-  }).catch((e) => {
-    console.log(e)
-  });
-});
-
-
 //login
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const email = loginForm['login-email'].value;
-  const password = loginForm['login-password'].value;
+  const email = loginForm['signin-email'].value;
+  const password = loginForm['signin-password'].value;
 
   auth.signInWithEmailAndPassword(email, password).then(cred => {
     const modal = document.getElementById('logModal');
     window.location.href="./main.html";
     loginForm.reset();
   }).catch((e) => {
-    // displayErrors(e, 'error-message');
+    console.log(e)
   });
 });
 
