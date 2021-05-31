@@ -14,7 +14,8 @@ function checkEqualPassword(password, reapeatPassword) {
   }
 }
 
-function validate() {
+function validate(e) {
+  e.preventDefault();
   const email = $("#singup-email").val();
   const $resultEmail = $(".result-email");
   const password = $("#signup-password").val();

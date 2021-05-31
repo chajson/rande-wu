@@ -88,7 +88,7 @@
       const signupForm = document.getElementById("signup-form");
       signupForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        validate();
+        validate(event);
         const email = signupForm["singup-email"].value;
         const password = signupForm["signup-password"].value;
         const name = signupForm["signup-name"].value;
