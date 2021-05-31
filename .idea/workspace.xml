@@ -3,16 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b6de7545-6606-4e2c-b71f-28374798f988" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add-description.html" beforeDir="false" afterPath="$PROJECT_DIR$/add-description.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/Grazyna_waligora.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/Karina_wlodarkiewicz.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/Mirga_Paloma.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/Staszek.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/pobrane.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/add-description.html" beforeDir="false" afterPath="$PROJECT_DIR$/components/add-description.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/add-hobby.html" beforeDir="false" afterPath="$PROJECT_DIR$/components/add-hobby.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/add-personaldata.html" beforeDir="false" afterPath="$PROJECT_DIR$/components/add-personaldata.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/main.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

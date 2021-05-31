@@ -67,11 +67,11 @@
               />
             </div>
             <div class="form-group">
-              <label for="bithday" class="text-left">Data urodzenia</label>
+              <label for="birthday" class="text-left">Data urodzenia</label>
               <input
                 type="bithday"
                 class="form-control"
-                id="bithday"
+                id="birthday"
                 placeholder="Wpisz date urodzenia"
               />
             </div>
@@ -85,30 +85,36 @@
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
-    <script src="js/initialize-app.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/initialize-app.js"></script>
+    <script src="../js/main.js"></script>
     <script>
-      const button = document.getElementById("addDescriptionButton");
-      button.addEventListener("click", (e) => {
-        const descriptionText = document.getElementById("textArea").value;
-        e.preventDefault();
-        const currentEmail = firebase.auth().currentUser.email;
-        db.collection("users")
-          .where("email", "==", currentEmail)
-          .get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              db.collection("users")
-                .doc(doc.id)
-                .update({ descriptionText })
-                .then(() => {
-                  alert("Dodano opis!");
+        const button = document.getElementById("addDescriptionButton");
+        button.addEventListener("click", (e) => {
+            const street = document.getElementById("street").value;
+            const city = document.getElementById("city").value;
+            const postcode = document.getElementById("postcode").value;
+            const age = document.getElementById("age").value;
+            const birthday = document.getElementById("birthday").value;
+            e.preventDefault();
+            const currentEmail = firebase.auth().currentUser.email;
+            console.log(currentEmail);
+            db.collection("users")
+                .where("email", "==", currentEmail)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        db.collection("users")
+                            .doc(doc.id)
+                            .update({ street, city, postcode, age, birthday })
+                            .then(() => {
+                                alert("Dodano dane personalne!");
+                            })
+                            .catch((err) => console.log(err));
+                    });
                 })
                 .catch((err) => console.log(err));
-            });
-          })
-          .catch((err) => console.log(err));
-      });
+        });
+    </script>
     </script>
   </body>
 </html>

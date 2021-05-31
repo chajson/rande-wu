@@ -19,7 +19,7 @@
     />
   </head>
 
-  <body onload="showUsers()">
+  <body onload="showUsers();">
     <nav class="bg-white shadow rounded overflow-hidden">
       <a href="login.html">Wyloguj</a>
       <a href="components/add-description.html" style="margin-left: 20px"
@@ -31,6 +31,7 @@
       <a href="components/add-personaldata.html" style="margin-left: 20px"
         >Dodaj swoje dane personalne</a
       >
+      <a id="display-username" style="margin-left: 80vw">Obecnie zalogowany</a>
     </nav>
     <div
       id="carouselExampleIndicators"
@@ -80,11 +81,19 @@
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
-    <script src="js/initialize-app.js"></script>
-    <script src="js/main.js"></script>
+    <script src="./js/initialize-app.js"></script>
+    <script src="./js/main.js"></script>
     <script>
+        const displayUsername = ()=> {
+            const currentEmail = auth.currentUser.email;
+            console.log(currentEmail);
+            const user = db.collection("users")
+                .where("email", "==", currentEmail)
+                .get();
+            const displayUsername = document.getElementById('display-username');
+            displayUsername.innerText = `${user.name} ${user.surname}`;
+        };
       const showUsers = () => {
-        console.log("git");
         const carousel = document.getElementById("carousel");
         db.collection("users")
           .get()
@@ -111,9 +120,23 @@
                       <h5 class="mb-0">O mnie</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
                       <p class="font-italic mb-0">${
-                        doc.data().descriptionText
+                        doc.data().descriptionText ?? 'Brak danych'
                       }</p>
                       </div>
+                      </div>
+<div class="px-4 py-3">
+                      <h5 class="mb-0">Dane personalne</h5>
+                      <div class="p-4 rounded shadow-sm bg-light">
+                      <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+                      </div>
+                      <h5 class="mb-0">Zainteresowania</h5>
+                      <div class="p-4 rounded shadow-sm bg-light">
+                      <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
                       </div>
                       </div>
                       </div>
@@ -146,34 +169,47 @@
             Array.prototype.current++;
             carousel.innerHTML = `<div class="carousel-item active">
                         <div class="row py-5 px-4">
-
-                       <div class="col-md-5 mx-auto">
+                            <div class="col-md-5 mx-auto">
                          <!-- Profile widget -->
-                      <div class="bg-white shadow rounded overflow-hidden">
-                      <div class="px-4 pt-0 pb-4 cover">
-                      <div class="media align-items-end profile-head">
-                      <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
-                      <div class="media-body mb-3">
-                      <h4 class="mt-0 mb-0">${doc.data().name} ${
+            <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+            <div class="media align-items-end profile-head">
+            <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+            <div class="media-body mb-3">
+            <h4 class="mt-0 mb-0">${doc.data().name} ${
               doc.data().surname
             }</h4>
-                      </div>
-                      <div class="media-footer mb-3">
-                      </div>
-                      </div>
-                      </div>
-                      <div class="px-4 py-3">
-                      <h5 class="mb-0">O mnie</h5>
-                      <div class="p-4 rounded shadow-sm bg-light">
-                      <p class="font-italic mb-0">${
-                        doc.data().descriptionText
+            </div>
+            <div class="media-footer mb-3">
+            </div>
+            </div>
+            </div>
+            <div class="px-4 py-3">
+            <h5 class="mb-0">O mnie</h5>
+            <div class="p-4 rounded shadow-sm bg-light">
+            <p class="font-italic mb-0">${
+                        doc.data().descriptionText ?? 'Brak danych'
                       }</p>
+            </div>
+            </div>
+            <div class="px-4 py-3">
+            <h5 class="mb-0">Dane personalne</h5>
+            <div class="p-4 rounded shadow-sm bg-light">
+            <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
+            <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
+            <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
+            <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
+            <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+</div>
+ <h5 class="mb-0">Zainteresowania</h5>
+                      <div class="p-4 rounded shadow-sm bg-light">
+                      <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
                       </div>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
+            </div>
+            </div>
+            </div>
+            </div>
 <a onclick="prevUser()" class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:#212529"></span>
       <span class="sr-only">Previous</span>
@@ -192,34 +228,49 @@
           .then((querySnapshot) => {
             const doc = querySnapshot.docs.prev();
             Array.prototype.current--;
-            console.log(doc.data());
             carousel.innerHTML = `<div class="carousel-item active">
                         <div class="row py-5 px-4">
                             <div class="col-md-5 mx-auto">
                          <!-- Profile widget -->
-                <div class="bg-white shadow rounded overflow-hidden">
-                <div class="px-4 pt-0 pb-4 cover">
-                <div class="media align-items-end profile-head">
-                <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
-                <div class="media-body mb-3">
-                <h4 class="mt-0 mb-0">${doc.data().name} ${
-              doc.data().surname
+                      <div class="bg-white shadow rounded overflow-hidden">
+                      <div class="px-4 pt-0 pb-4 cover">
+                      <div class="media align-items-end profile-head">
+                      <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+                      <div class="media-body mb-3">
+                      <h4 class="mt-0 mb-0">${doc.data().name} ${
+                doc.data().surname
             }</h4>
-                </div>
-                <div class="media-footer mb-3">
-                </div>
-                </div>
-                </div>
-                <div class="px-4 py-3">
-                <h5 class="mb-0">O mnie</h5>
-                <div class="p-4 rounded shadow-sm bg-light">
-                <p class="font-italic mb-0">${doc.data().descriptionText}</p>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
+                      </div>
+                      <div class="media-footer mb-3">
+                      </div>
+                      </div>
+                      </div>
+                      <div class="px-4 py-3">
+                      <h5 class="mb-0">O mnie</h5>
+                      <div class="p-4 rounded shadow-sm bg-light">
+                      <p class="font-italic mb-0">${
+                doc.data().descriptionText ?? 'Brak danych'
+            }</p>
+                      </div>
+                      </div>
+<div class="px-4 py-3">
+                      <h5 class="mb-0">Dane personalne</h5>
+                      <div class="p-4 rounded shadow-sm bg-light">
+                      <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+                      </div>
+ <h5 class="mb-0">Zainteresowania</h5>
+                      <div class="p-4 rounded shadow-sm bg-light">
+                      <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
                 <a onclick="prevUser()" class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color:#212529"></span>
                 <span class="sr-only">Previous</span>
