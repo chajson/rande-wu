@@ -23,6 +23,6 @@ function validate(e) {
 
   checkEqualPassword(password, equalPassword);
   if (!validateEmail(email)) {
-    $resultEmail.text("Adres email (" + email + ") ma niepoprawny format");
+    $resultEmail.text("Podany adres email ma niepoprawny format");
   }
 }
