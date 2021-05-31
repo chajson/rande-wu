@@ -6,13 +6,13 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="manifest" href="site.webmanifest" />
-    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <link rel="apple-touch-icon" href="../icon.png" />
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -21,23 +21,28 @@
 
   <body onload="showUsers();">
     <nav class="bg-white shadow rounded overflow-hidden">
-      <a href="login.html">Wyloguj</a>
-      <a href="components/add-description.html" style="margin-left: 20px"
+      <a href="../login.html">Wyloguj</a>
+      <a href="add-description.html" style="margin-left: 20px"
         >Dodaj opis</a
       >
-      <a href="components/add-hobby.html" style="margin-left: 20px"
+      <a href="add-hobby.html" style="margin-left: 20px"
         >Dodaj swoje zainteresowania</a
       >
-      <a href="components/add-personaldata.html" style="margin-left: 20px"
+      <a href="add-personaldata.html" style="margin-left: 20px"
         >Dodaj swoje dane personalne</a
       >
-      <a id="display-username" style="margin-left: 80vw">Obecnie zalogowany</a>
+      <a href="pariedpeople.html" style="margin-left: 20px"
+        >Pokaż sparowanych użytkowników</a
+      >
+      <a id="display-username" style="margin-left: 80vw">Obecnie zalogowany: </a>
     </nav>
     <div
       id="carouselExampleIndicators"
       class="carousel slide"
       data-interval="false"
     >
+      <button id="reject" type="button" class="btn btn-danger">Odrzuć</button>
+      <button id="accept" type="button" class="btn btn-success">Zaakceptuj</button>
       <div class="carousel-inner" id="carousel">
         <a
           class="carousel-control-prev"
@@ -70,10 +75,10 @@
         <a
           class="px-4 pt-0 pb-4 cover"
           style="color: white"
-          href="./privacy-policy.html"
+          href="../privacy-policy.html"
           >Polityka prywatności</a
         >
-        <a class="px-4 pt-0 pb-4 cover" style="color: white" href="help.html"
+        <a class="px-4 pt-0 pb-4 cover" style="color: white" href="../help.html"
           >Pomoc</a
         >
       </div>
@@ -81,19 +86,31 @@
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
-    <script src="./js/initialize-app.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="../js/initialize-app.js"></script>
+    <script src="../js/main.js"></script>
     <script>
-        const displayUsername = ()=> {
-            const currentEmail = auth.currentUser.email;
-            console.log(currentEmail);
-            const user = db.collection("users")
-                .where("email", "==", currentEmail)
-                .get();
-            const displayUsername = document.getElementById('display-username');
-            displayUsername.innerText = `${user.name} ${user.surname}`;
-        };
-      const showUsers = () => {
+        const acceptButton = document.getElementById("accept");
+        acceptButton.addEventListener("click", (e) => {
+            db.collection("users")
+                .get()
+                .then((querySnapshot) => {
+                    const doc = querySnapshot.docs[0];
+                    acceptUser(doc.data().email)
+                });
+        });
+
+        const rejectButton = document.getElementById("reject");
+        rejectButton.addEventListener("click", (e) => {
+            db.collection("users")
+                .get()
+                .then((querySnapshot) => {
+                    const doc = querySnapshot.docs[0];
+                    rejectUser(doc.data().email)
+                });
+        });
+
+
+        const showUsers = () => {
         const carousel = document.getElementById("carousel");
         db.collection("users")
           .get()
@@ -106,10 +123,11 @@
                       <div class="bg-white shadow rounded overflow-hidden">
                       <div class="px-4 pt-0 pb-4 cover">
                       <div class="media align-items-end profile-head">
-                      <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+                      <div class="profile mr-3"><img src="../img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
                       <div class="media-body mb-3">
+                      <h6 id="email"></h6>
                       <h4 class="mt-0 mb-0">${doc.data().name} ${
-              doc.data().surname
+                doc.data().surname
             }</h4>
                       </div>
                       <div class="media-footer mb-3">
@@ -120,8 +138,8 @@
                       <h5 class="mb-0">O mnie</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
                       <p class="font-italic mb-0">${
-                        doc.data().descriptionText ?? 'Brak danych'
-                      }</p>
+                doc.data().descriptionText ?? 'Brak danych'
+            }</p>
                       </div>
                       </div>
 <div class="px-4 py-3">
@@ -174,7 +192,7 @@
             <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
             <div class="media align-items-end profile-head">
-            <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+            <div class="profile mr-3"><img src="../img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
             <div class="media-body mb-3">
             <h4 class="mt-0 mb-0">${doc.data().name} ${
               doc.data().surname
@@ -185,6 +203,8 @@
             </div>
             </div>
             <div class="px-4 py-3">
+                            <button type="button" onclick="rejectUser(doc.data().email)" class="btn btn-danger">Odrzuć</button>
+                      <button type="button" onclick="acceptUser(doc.data().email)" class="btn btn-success">Zaakceptuj</button>
             <h5 class="mb-0">O mnie</h5>
             <div class="p-4 rounded shadow-sm bg-light">
             <p class="font-italic mb-0">${
@@ -235,7 +255,7 @@
                       <div class="bg-white shadow rounded overflow-hidden">
                       <div class="px-4 pt-0 pb-4 cover">
                       <div class="media align-items-end profile-head">
-                      <div class="profile mr-3"><img src="./img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+                      <div class="profile mr-3"><img src="../img/Profile_avatar_placeholder_large.png" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
                       <div class="media-body mb-3">
                       <h4 class="mt-0 mb-0">${doc.data().name} ${
                 doc.data().surname

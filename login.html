@@ -36,6 +36,11 @@
     </div>
   </div>
 </div>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
+<script src="js/initialize-app.js"></script>
+<script src="js/main.js"></script>
 <script>
     const loginForm = document.getElementById('login-form');
     loginForm.addEventListener('submit', (e) => {
@@ -44,27 +49,14 @@
         const email = loginForm['signin-email'].value;
         const password = loginForm['signin-password'].value;
 
-        auth.signInWithEmailAndPassword(email, password).then(cred => {
-            const modal = document.getElementById('logModal');
-            window.location.href="./main.html";
-            loginForm.reset();
-        }).catch((e) => {
-            alert('Błąd logowania');
-            console.log(e);
-        });
+        login(email, password);
     });
 </script>
-<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
-<script src="js/initialize-app.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/main.js"></script>
+
 <script src="js/vendor/modernizr-3.8.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 <script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <script>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <nav class="bg-white shadow rounded overflow-hidden">
+      <a href="../login.html">Wyloguj</a>
+      <a href="../main.html" style="margin-left: 20px">Poznaj nowe osoby</a>
+    </nav>
+    <nav></nav>
+    <div class="row">
+      <div class="col-md-8 text-center" style="margin: 20px auto">
+        <h4>Wiadomości dla administratora</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        style="margin: 20px auto; padding: 20px"
+        class="
+          col-md-8
+          bg-white
+          shadow
+          rounded
+          overflow-hidden
+          text-justify text-center
+        "
+      >
+        <b>Waiadomość od</b>
+        <p>Treść wiadomosci</p>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        style="margin: 20px auto; padding: 20px"
+        class="
+          col-md-8
+          bg-white
+          shadow
+          rounded
+          overflow-hidden
+          text-justify text-center
+        "
+      >
+        <b>Waiadomość od</b>
+        <p>Treść wiadomosci</p>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        style="margin: 20px auto; padding: 20px"
+        class="
+          col-md-8
+          bg-white
+          shadow
+          rounded
+          overflow-hidden
+          text-justify text-center
+        "
+      >
+        <b>Waiadomość od</b>
+        <p>Treść wiadomosci</p>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
+    <script src="js/initialize-app.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      const button = document.getElementById("addDescriptionButton");
+      button.addEventListener("click", (e) => {
+        const descriptionText = document.getElementById("textArea").value;
+        e.preventDefault();
+        const currentEmail = firebase.auth().currentUser.email;
+        db.collection("users")
+          .where("email", "==", currentEmail)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              db.collection("users")
+                .doc(doc.id)
+                .update({ descriptionText })
+                .then(() => {
+                  alert("Dodano opis!");
+                })
+                .catch((err) => console.log(err));
+            });
+          })
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>
