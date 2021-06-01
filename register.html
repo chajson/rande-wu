@@ -97,7 +97,7 @@
           .createUserWithEmailAndPassword(email, password)
           .then((cred) => {
             const modal = document.getElementById("signupModal");
-            window.location.href = "./main.html";
+            window.location.href = "./components/main.html";
             signupForm.reset();
           })
           .catch((e) => {
