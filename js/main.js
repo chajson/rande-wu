@@ -45,7 +45,7 @@ const rejectUser = (rejectedUserEmail) => {
 const login = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password).then(cred => {
     const modal = document.getElementById('logModal');
-    window.location.href="./main.html";
+    window.location.href="components/main.html";
     loginForm.reset();
   }).catch((e) => {
     alert('Błąd logowania');

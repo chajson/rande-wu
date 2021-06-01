@@ -1,11 +1,10 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyA5D5N_9YWAIKXq26nvRhC3jtdG3zCYSMc",
-  authDomain: "randewu-d91d7.firebaseapp.com",
-  databaseURL: "https://randewu-d91d7.firebaseio.com",
-  projectId: "randewu-d91d7",
-  storageBucket: "randewu-d91d7.appspot.com",
-  messagingSenderId: "950118542915",
-  appId: "1:950118542915:web:ceddf745acef13538eaef6"
+  apiKey: "AIzaSyDqs8ODEKXdo7YENQLbKFpbVogsDd2VLgM",
+  authDomain: "rande-wu-v2.firebaseapp.com",
+  projectId: "rande-wu-v2",
+  storageBucket: "rande-wu-v2.appspot.com",
+  messagingSenderId: "1049212352083",
+  appId: "1:1049212352083:web:f7cf55933bb2f9cec078a6"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

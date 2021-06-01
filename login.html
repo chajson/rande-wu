@@ -67,11 +67,12 @@
 <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
 <script src="js/initialize-app.js"></script>
 <script src="js/main.js"></script>
+<script src="js/register.js"></script>
 <script>
       const loginForm = document.getElementById("login-form");
       loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        validate(event);
+        validate(e);
 
         const email = loginForm["signin-email"].value;
         const password = loginForm["signin-password"].value;

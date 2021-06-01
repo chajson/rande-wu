@@ -83,34 +83,34 @@
         </div>
       </div>
     </div>
-    <script>
-      const signupForm = document.getElementById("signup-form");
-      signupForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        validate(event);
-        const email = signupForm["singup-email"].value;
-        const password = signupForm["signup-password"].value;
-        const name = signupForm["signup-name"].value;
-        const surname = signupForm["signup-surname"].value;
-        createUser(email, password, name, surname);
-        auth
-          .createUserWithEmailAndPassword(email, password)
-          .then((cred) => {
-            const modal = document.getElementById("signupModal");
-            window.location.href = "./main.html";
-            signupForm.reset();
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      });
-    </script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
     <script src="js/initialize-app.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        const signupForm = document.getElementById("signup-form");
+        signupForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            validate(event);
+            const email = signupForm["singup-email"].value;
+            const password = signupForm["signup-password"].value;
+            const name = signupForm["signup-name"].value;
+            const surname = signupForm["signup-surname"].value;
+            createUser(email, password, name, surname);
+            auth
+                .createUserWithEmailAndPassword(email, password)
+                .then((cred) => {
+                    const modal = document.getElementById("signupModal");
+                    window.location.href = 'components/main.html';
+                    signupForm.reset();
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        });
+    </script>
     <script src="js/vendor/modernizr-3.8.0.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
