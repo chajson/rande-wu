@@ -12,6 +12,6 @@ function validate(e) {
   if (!validateEmail(email)) {
     $resultEmail.text("Podany adres email ma niepoprawny format");
   } else {
-    $resultEmail.text(" ");
+    $resultEmail.text("Nie ma takiego hasła lub emailu w bazie danych");
   }
 }
