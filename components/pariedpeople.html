@@ -22,7 +22,7 @@
   <body>
     <nav class="bg-white shadow rounded overflow-hidden">
       <a href="../login.html">Wyloguj</a>
-      <a href="../main.html" style="margin-left: 20px">Poznaj nowe osoby</a>
+      <a href="main.html" style="margin-left: 20px">Poznaj nowe osoby</a>
     </nav>
     <nav></nav>
     <div class="row">
@@ -33,9 +33,9 @@
     <div class="row">
       <div
         style="margin: 20px auto; padding: 20px"
-        class="col-md-8 bg-white shadow rounded overflow-hidden">
-        <ul id="usersList">
-        </ul>
+        class="col-md-8 bg-white shadow rounded overflow-hidden"
+      >
+        <ul id="usersList"></ul>
       </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
@@ -44,23 +44,29 @@
     <script src="../js/initialize-app.js"></script>
     <script src="../js/main.js"></script>
     <script>
-      window.addEventListener('load', (e) => {
-          const usersList = document.getElementById("usersList");
-          e.preventDefault();
-          const currentEmail = firebase.auth().currentUser.email;
-          console.log(currentEmail);
-          db.collection("users")
-              .where("email", "==", currentEmail)
-              .get()
-              .then((querySnapshot) => {
-                  querySnapshot.forEach((doc) => {
-                      const acceptedUserEmails = doc.acceptedUserEmails ?? [];
-                      usersList.innerHTML = acceptedUserEmails.forEach(email => {
-                          return `<li>${email}</li>`
-                      })
-                  });
-              })
-              .catch((err) => console.log(err));
+      window.addEventListener("load", (e) => {
+          auth.onAuthStateChanged(user => {
+              const usersList = document.getElementById("usersList");
+              e.preventDefault()
+              db.collection("users")
+                  .where("email", "==", user.email)
+                  .get()
+                  .then((querySnapshot) => {
+                      querySnapshot.forEach((doc) => {
+                          console.log(doc.data().acceptedUserEmails);
+                          const acceptedUserEmails = doc.data().acceptedUserEmails ?? [];
+                           acceptedUserEmails.forEach((email) => {
+                               const a = document.createElement("a");
+                               const li = document.createElement("li");
+                               a.textContent = email;
+                               a.href = `./followed-profile.html?followed-email=${email.replace('+', '%2B')}`;
+                               li.appendChild(a);
+                               usersList.appendChild(li);
+                          });
+                      });
+                  })
+                  .catch((err) => console.log(err));
+          });
       });
     </script>
   </body>
