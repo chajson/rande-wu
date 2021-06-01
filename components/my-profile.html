@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="manifest" href="../site.webmanifest" />
+  <link rel="apple-touch-icon" href="../icon.png" />
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="../css/normalize.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  />
+</head>
+
+<body onload="showUser();">
+<nav class="bg-white shadow rounded overflow-hidden">
+  <a href="../login.html">Wyloguj</a>
+  <a href="add-description.html" style="margin-left: 20px"
+  >Dodaj opis</a
+  >
+  <a href="add-hobby.html" style="margin-left: 20px"
+  >Dodaj swoje zainteresowania</a
+  >
+  <a href="add-personaldata.html" style="margin-left: 20px"
+  >Dodaj swoje dane personalne</a
+  >
+  <a href="pariedpeople.html" style="margin-left: 20px"
+  >Pokaż sparowanych użytkowników</a
+  >
+  <a href="main.html" style="margin-left: 20px"
+  >Przeglądaj użytkowników</a
+  >
+  <a id="display-username" style="margin-left: 80vw">Obecnie zalogowany: </a>
+</nav>
+<div
+  id="carouselExampleIndicators"
+  class="carousel slide"
+  data-interval="false"
+>
+  <div class="carousel-inner" id="carousel">
+  </div>
+  <div class="px-4 pt-0 pb-4 cover">
+    <a
+      class="px-4 pt-0 pb-4 cover"
+      style="color: white"
+      href="../privacy-policy.html"
+    >Polityka prywatności</a
+    >
+    <a class="px-4 pt-0 pb-4 cover" style="color: white" href="../help.html"
+    >Pomoc</a
+    >
+  </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
+<script src="../js/initialize-app.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    const showUser = () => {
+        auth.onAuthStateChanged(user => {
+        const carousel = document.getElementById("carousel");
+        db.collection("users")
+            .where("email", "==", user.email)
+            .get()
+            .then((querySnapshot) => {
+                const doc = querySnapshot.docs[0];
+                carousel.innerHTML = `<div class="carousel-item active">
+                        <div class="row py-5 px-4">
+                            <div class="col-md-5 mx-auto">
+                         <!-- Profile widget -->
+                <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                <div class="media-body mb-3">
+                <h6 id="email"></h6>
+                <h4 class="mt-0 mb-0">${doc.data().name} ${
+                doc.data().surname
+            }</h4>
+                </div>
+                <div class="media-footer mb-3">
+                </div>
+                </div>
+                </div>
+                <div class="px-4 py-3">
+                <h5 class="mb-0">O mnie</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                <p class="font-italic mb-0">${
+                doc.data().descriptionText ?? 'Brak danych'
+            }</p>
+                </div>
+                </div>
+                <div class="px-4 py-3">
+                <h5 class="mb-0">Dane personalne</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
+                <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
+                <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
+                <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
+                <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+                </div>
+                <h5 class="mb-0">Zainteresowania</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
+                <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </a>`;
+                });
+        });
+    };
+</script>
+</body>
+</html>
