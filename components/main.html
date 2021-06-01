@@ -22,9 +22,7 @@
   <body onload="showUsers();">
     <nav class="bg-white shadow rounded overflow-hidden">
       <a href="../login.html">Wyloguj</a>
-      <a href="add-description.html" style="margin-left: 20px"
-        >Dodaj opis</a
-      >
+      <a href="add-description.html" style="margin-left: 20px">Dodaj opis</a>
       <a href="add-hobby.html" style="margin-left: 20px"
         >Dodaj swoje zainteresowania</a
       >
@@ -34,15 +32,26 @@
       <a href="pariedpeople.html" style="margin-left: 20px"
         >Pokaż sparowanych użytkowników</a
       >
-      <a id="display-username" style="margin-left: 80vw">Obecnie zalogowany: </a>
+      <a id="display-username" style="margin-left: 80vw"
+        >Obecnie zalogowany:
+      </a>
     </nav>
     <div
       id="carouselExampleIndicators"
       class="carousel slide"
       data-interval="false"
     >
-      <button id="reject" type="button" class="btn btn-danger">Odrzuć</button>
-      <button id="accept" type="button" class="btn btn-success">Zaakceptuj</button>
+      <div class="row text-center">
+        <div class="col-md-6" style="margin: 0 auto">
+          <button id="reject" type="button" class="btn btn-danger">
+            Odrzuć
+          </button>
+          <button id="accept" type="button" class="btn btn-success">
+            Zaakceptuj
+          </button>
+        </div>
+      </div>
+
       <div class="carousel-inner" id="carousel">
         <a
           class="carousel-control-prev"
@@ -89,28 +98,27 @@
     <script src="../js/initialize-app.js"></script>
     <script src="../js/main.js"></script>
     <script>
-        const acceptButton = document.getElementById("accept");
-        acceptButton.addEventListener("click", (e) => {
-            db.collection("users")
-                .get()
-                .then((querySnapshot) => {
-                    const doc = querySnapshot.docs[0];
-                    acceptUser(doc.data().email)
-                });
-        });
+      const acceptButton = document.getElementById("accept");
+      acceptButton.addEventListener("click", (e) => {
+        db.collection("users")
+          .get()
+          .then((querySnapshot) => {
+            const doc = querySnapshot.docs[0];
+            acceptUser(doc.data().email);
+          });
+      });
 
-        const rejectButton = document.getElementById("reject");
-        rejectButton.addEventListener("click", (e) => {
-            db.collection("users")
-                .get()
-                .then((querySnapshot) => {
-                    const doc = querySnapshot.docs[0];
-                    rejectUser(doc.data().email)
-                });
-        });
+      const rejectButton = document.getElementById("reject");
+      rejectButton.addEventListener("click", (e) => {
+        db.collection("users")
+          .get()
+          .then((querySnapshot) => {
+            const doc = querySnapshot.docs[0];
+            rejectUser(doc.data().email);
+          });
+      });
 
-
-        const showUsers = () => {
+      const showUsers = () => {
         const carousel = document.getElementById("carousel");
         db.collection("users")
           .get()
@@ -126,7 +134,7 @@
                       <div class="media-body mb-3">
                       <h6 id="email"></h6>
                       <h4 class="mt-0 mb-0">${doc.data().name} ${
-                doc.data().surname
+              doc.data().surname
             }</h4>
                       </div>
                       <div class="media-footer mb-3">
@@ -137,23 +145,37 @@
                       <h5 class="mb-0">O mnie</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
                       <p class="font-italic mb-0">${
-                doc.data().descriptionText ?? 'Brak danych'
-            }</p>
+                        doc.data().descriptionText ?? "Brak danych"
+                      }</p>
                       </div>
                       </div>
 <div class="px-4 py-3">
                       <h5 class="mb-0">Dane personalne</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
-                      <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Miasto/miejscowość:  ${
+                        doc.data().city ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Kod pocztowy:  ${
+                        doc.data().postcode ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Ulica:  ${
+                        doc.data().street ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Wiek:  ${
+                        doc.data().age ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Data urodzenia:  ${
+                        doc.data().birthday ?? "Brak danych"
+                      }</p>
                       </div>
                       <h5 class="mb-0">Zainteresowania</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
-                      <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Hobby:  ${
+                        doc.data().hobby ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${
+                        doc.data().additionalHobbyInfo ?? "Brak danych"
+                      }</p>
                       </div>
                       </div>
                       </div>
@@ -192,9 +214,7 @@
             <div class="px-4 pt-0 pb-4 cover">
             <div class="media align-items-end profile-head">
             <div class="media-body mb-3">
-            <h4 class="mt-0 mb-0">${doc.data().name} ${
-              doc.data().surname
-            }</h4>
+            <h4 class="mt-0 mb-0">${doc.data().name} ${doc.data().surname}</h4>
             </div>
             <div class="media-footer mb-3">
             </div>
@@ -204,23 +224,37 @@
             <h5 class="mb-0">O mnie</h5>
             <div class="p-4 rounded shadow-sm bg-light">
             <p class="font-italic mb-0">${
-                        doc.data().descriptionText ?? 'Brak danych'
-                      }</p>
+              doc.data().descriptionText ?? "Brak danych"
+            }</p>
             </div>
             </div>
             <div class="px-4 py-3">
             <h5 class="mb-0">Dane personalne</h5>
             <div class="p-4 rounded shadow-sm bg-light">
-            <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
-            <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
-            <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
-            <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
-            <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+            <p class="font-italic mb-0">Miasto/miejscowość:  ${
+              doc.data().city ?? "Brak danych"
+            }</p>
+            <p class="font-italic mb-0">Kod pocztowy:  ${
+              doc.data().postcode ?? "Brak danych"
+            }</p>
+            <p class="font-italic mb-0">Ulica:  ${
+              doc.data().street ?? "Brak danych"
+            }</p>
+            <p class="font-italic mb-0">Wiek:  ${
+              doc.data().age ?? "Brak danych"
+            }</p>
+            <p class="font-italic mb-0">Data urodzenia:  ${
+              doc.data().birthday ?? "Brak danych"
+            }</p>
 </div>
  <h5 class="mb-0">Zainteresowania</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
-                      <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Hobby:  ${
+                        doc.data().hobby ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${
+                        doc.data().additionalHobbyInfo ?? "Brak danych"
+                      }</p>
                       </div>
             </div>
             </div>
@@ -253,7 +287,7 @@
                       <div class="media align-items-end profile-head">
                       <div class="media-body mb-3">
                       <h4 class="mt-0 mb-0">${doc.data().name} ${
-                doc.data().surname
+              doc.data().surname
             }</h4>
                       </div>
                       <div class="media-footer mb-3">
@@ -264,23 +298,37 @@
                       <h5 class="mb-0">O mnie</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
                       <p class="font-italic mb-0">${
-                doc.data().descriptionText ?? 'Brak danych'
-            }</p>
+                        doc.data().descriptionText ?? "Brak danych"
+                      }</p>
                       </div>
                       </div>
 <div class="px-4 py-3">
                       <h5 class="mb-0">Dane personalne</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
-                      <p class="font-italic mb-0">Miasto/miejscowość:  ${doc.data().city ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Kod pocztowy:  ${doc.data().postcode ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Ulica:  ${doc.data().street ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Wiek:  ${doc.data().age ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Data urodzenia:  ${doc.data().birthday ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Miasto/miejscowość:  ${
+                        doc.data().city ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Kod pocztowy:  ${
+                        doc.data().postcode ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Ulica:  ${
+                        doc.data().street ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Wiek:  ${
+                        doc.data().age ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Data urodzenia:  ${
+                        doc.data().birthday ?? "Brak danych"
+                      }</p>
                       </div>
  <h5 class="mb-0">Zainteresowania</h5>
                       <div class="p-4 rounded shadow-sm bg-light">
-                      <p class="font-italic mb-0">Hobby:  ${doc.data().hobby ?? 'Brak danych'}</p>
-                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${doc.data().additionalHobbyInfo ?? 'Brak danych'}</p>
+                      <p class="font-italic mb-0">Hobby:  ${
+                        doc.data().hobby ?? "Brak danych"
+                      }</p>
+                      <p class="font-italic mb-0">Kilka słów ode mnie:  ${
+                        doc.data().additionalHobbyInfo ?? "Brak danych"
+                      }</p>
                       </div>
                       </div>
                       </div>
